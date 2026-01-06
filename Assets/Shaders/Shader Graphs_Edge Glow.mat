@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Edge Glow
+  m_Name: Shader Graphs_Edge Glow
   m_Shader: {fileID: -6465566751694194690, guid: 046a13063dd73364aa78f8610a189c72, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,16 +38,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.1
-    - _Glow_Power: 0.3
+    - _Alpha: 0
+    - _Glow_Power: 0.7
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Glow_Color: {r: 0, g: 1, b: 0.63319755, a: 1}
-    - _Object_Color: {r: 1, g: 0, b: 0, a: 0}
+    - _Glow_Color: {r: 0.49056602, g: 0, b: 0.043365046, a: 1}
+    - _Object_Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &2481906530207901610
+--- !u!114 &6684460788743696722
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
