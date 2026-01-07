@@ -17,7 +17,7 @@ public class BasicProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {   
-        Debug.Log("platform hit");
+        // Debug.Log("platform hit");
         Destroy(gameObject);
     }
 }
