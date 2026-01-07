@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /*
@@ -7,22 +8,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Camera Rotation
-    public float mouseSensitivity = 2f;
+    [SerializeField] private float mouseSensitivity = 2f;
     private float verticalRotation = 0f;
-    private Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform;
     
     // Ground Movement
     private Rigidbody rb;
-    public float MoveSpeed = 5f;
+    [SerializeField] private float MoveSpeed = 5f;
     private float moveHorizontal;
     private float moveForward;
 
     // Jumping
-    public float jumpForce = 10f;
-    public float fallMultiplier = 2.5f; // Multiplies gravity when falling down
-    public float ascendMultiplier = 2f; // Multiplies gravity for ascending to peak of jump
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float fallMultiplier = 2.5f; // Multiplies gravity when falling down
+    [SerializeField] private float ascendMultiplier = 2f; // Multiplies gravity for ascending to peak of jump
     private bool isGrounded = true;
-    public LayerMask groundLayer;
+    [SerializeField] private LayerMask groundLayer;
     private float groundCheckTimer = 0f;
     private float groundCheckDelay = 0.3f;
     private float playerHeight;
@@ -65,9 +66,7 @@ public class PlayerController : MonoBehaviour
         {
             groundCheckTimer -= Time.deltaTime;
         }
-
     }
-
     void FixedUpdate()
     {
         MovePlayer();
@@ -124,4 +123,6 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity += Vector3.up * Physics.gravity.y * ascendMultiplier  * Time.fixedDeltaTime;
         }
     }
+
+
 }
