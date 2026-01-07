@@ -429,5 +429,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireController
   fireKeyCode: 323
-  basicProjectilePrefab: {fileID: 7633372355513692726, guid: bbc9a760d8597cc4a88389b1f603a6b5, type: 3}
   cameraObject: {fileID: 2405182593357800097}
+  basicProjectilePrefab: {fileID: 7633372355513692726, guid: bbc9a760d8597cc4a88389b1f603a6b5, type: 3}
+  basicProjectileFireCooldown: 0.5
