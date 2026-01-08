@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 /*
-    This script provides jumping and movement in Unity 3D - Gatsby
+    This script provides jumping and movement in Unity 3D - Gatsby (YT)
 */
 
 public class PlayerController : MonoBehaviour
@@ -29,6 +29,14 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private float raycastDistance;
 
+    // Resource Management
+    [SerializeField] private float healthPoints = 100;
+    [SerializeField] private float regenDelay = 3f;
+    [SerializeField] private float regenTickSpeed = 0.25f;
+    private float maxHP;
+    private float startHealthRegeneration = 0f;
+    private float nextTick = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -42,6 +50,9 @@ public class PlayerController : MonoBehaviour
         // Hides the mouse
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Set Max HP
+        maxHP = healthPoints;
     }
 
     void Update()
@@ -65,6 +76,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             groundCheckTimer -= Time.deltaTime;
+        }
+
+        // Regenerate HP up to max if we haven't taken damage recently
+        if (healthPoints < maxHP && Time.time >= startHealthRegeneration && Time.time >= nextTick)
+        {
+            healthPoints = Math.Min(healthPoints + 1, maxHP);
+            nextTick = Time.time + regenTickSpeed;
+            Debug.Log("HP: " + healthPoints);
+        }
+
+        // Game Over 
+        if (healthPoints <= 0)
+        {
+            Debug.Log("Game Over");
         }
     }
     void FixedUpdate()
@@ -124,5 +149,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Health Stuff
+
+    public float getHealth()
+    {
+        return healthPoints;
+    }
+
+    public void applyDamage(float dmg)
+    {
+        healthPoints -= dmg;
+        startHealthRegeneration = Time.time + regenDelay;
+        Debug.Log("HP: " + healthPoints);
+    }
 
 }

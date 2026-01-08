@@ -305,6 +305,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  healthPoints: 100
+  regenDelay: 3
+  regenTickSpeed: 0.25
 --- !u!1 &7345685887700086206
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +413,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireController
   fireKeyCode: 323
   cameraObject: {fileID: 2405182593357800097}
+  minHealthThreshold: 15
   basicProjectilePrefab: {fileID: 7633372355513692726, guid: bbc9a760d8597cc4a88389b1f603a6b5, type: 3}
   basicProjectileFireCooldown: 0.5
+  basicProjectileCost: 2.5
+  controllerScriptRef: {fileID: 1237715742153778590}
 --- !u!1 &8501311201013813061
 GameObject:
   m_ObjectHideFlags: 0
