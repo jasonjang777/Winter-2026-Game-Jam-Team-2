@@ -4,6 +4,12 @@ public class BasicProjectile : MonoBehaviour
 {
 
     [SerializeField] private float projectileSpeed = 1f;
+    [SerializeField] private float projectileLifetime = 3f;
+
+    void Start()
+    {
+        Destroy(gameObject, projectileLifetime);
+    }
     // Update is called once per frame
     void Update()
     {

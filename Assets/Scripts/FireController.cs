@@ -17,7 +17,7 @@ public class FireController : MonoBehaviour
     void Update()
     {
         // Fire projectiles
-        if(Input.GetKeyDown(fireKeyCode) && Time.time >= nextFireTime)
+        if(Input.GetKey(fireKeyCode) && Time.time >= nextFireTime)
         {
             FireBasicProjectile();
         }
