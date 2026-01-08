@@ -1,32 +1,42 @@
+using System;
 using UnityEngine;
 
 /*
-    This script provides jumping and movement in Unity 3D - Gatsby
+    This script provides jumping and movement in Unity 3D - Gatsby (YT)
 */
 
 public class PlayerController : MonoBehaviour
 {
     // Camera Rotation
-    public float mouseSensitivity = 2f;
+    [SerializeField] private float mouseSensitivity = 2f;
     private float verticalRotation = 0f;
-    private Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform;
     
     // Ground Movement
     private Rigidbody rb;
-    public float MoveSpeed = 5f;
+    [SerializeField] private float MoveSpeed = 5f;
     private float moveHorizontal;
     private float moveForward;
 
     // Jumping
-    public float jumpForce = 10f;
-    public float fallMultiplier = 2.5f; // Multiplies gravity when falling down
-    public float ascendMultiplier = 2f; // Multiplies gravity for ascending to peak of jump
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float fallMultiplier = 2.5f; // Multiplies gravity when falling down
+    [SerializeField] private float ascendMultiplier = 2f; // Multiplies gravity for ascending to peak of jump
     private bool isGrounded = true;
-    public LayerMask groundLayer;
+    [SerializeField] private LayerMask groundLayer;
     private float groundCheckTimer = 0f;
     private float groundCheckDelay = 0.3f;
     private float playerHeight;
     private float raycastDistance;
+
+    // Resource Management
+    [SerializeField] private float healthPoints = 100;
+    [SerializeField] private float regenDelay = 3f;
+    [SerializeField] private float regenTickSpeed = 0.25f;
+    [SerializeField] private HealthBarUI healthBar;
+    private float maxHP;
+    private float startHealthRegeneration = 0f;
+    private float nextTick = 0f;
 
     void Start()
     {
@@ -41,6 +51,10 @@ public class PlayerController : MonoBehaviour
         // Hides the mouse
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Set Max HP
+        maxHP = healthPoints;
+        healthBar.setMaxHealth(maxHP);
     }
 
     void Update()
@@ -66,8 +80,20 @@ public class PlayerController : MonoBehaviour
             groundCheckTimer -= Time.deltaTime;
         }
 
-    }
+        // Regenerate HP up to max if we haven't taken damage recently
+        if (healthPoints < maxHP && Time.time >= startHealthRegeneration && Time.time >= nextTick)
+        {
+            applyHeal(1);
+            nextTick = Time.time + regenTickSpeed;
+            Debug.Log("HP: " + healthPoints);
+        }
 
+        // Game Over 
+        if (healthPoints <= 0)
+        {
+            Debug.Log("Game Over");
+        }
+    }
     void FixedUpdate()
     {
         MovePlayer();
@@ -123,5 +149,26 @@ public class PlayerController : MonoBehaviour
             // Rising: Change multiplier to make player reach peak of jump faster
             rb.linearVelocity += Vector3.up * Physics.gravity.y * ascendMultiplier  * Time.fixedDeltaTime;
         }
+    }
+
+    // Health Stuff
+
+    public float getHealth()
+    {
+        return healthPoints;
+    }
+
+    public void applyDamage(float dmg)
+    {
+        healthPoints = Math.Max(healthPoints - dmg, 0f);
+        startHealthRegeneration = Time.time + regenDelay;
+        healthBar.setHealth(healthPoints);
+        Debug.Log("HP: " + healthPoints);
+    }
+    public void applyHeal(float heal)
+    {
+        healthPoints = Math.Min(healthPoints + heal, maxHP);
+        healthBar.setHealth(healthPoints);
+        Debug.Log("HP: " + healthPoints);
     }
 }
