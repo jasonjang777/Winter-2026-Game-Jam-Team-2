@@ -1,3 +1,4 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class FireController : MonoBehaviour
@@ -7,17 +8,23 @@ public class FireController : MonoBehaviour
     [SerializeField] private GameObject cameraObject;
     private float nextFireTime = 0f; 
 
-
+    [SerializeField] private float minHealthThreshold = 15f;
     // Basic Projectile
     [SerializeField] private GameObject basicProjectilePrefab;   
     [SerializeField] private float basicProjectileFireCooldown = 0.5f;
+    [SerializeField] private float basicProjectileCost = 2.5f;
+
+    // Player Script
+    public PlayerController controllerScriptRef;
 
 
     // Update is called once per frame
     void Update()
     {
         // Fire projectiles
-        if(Input.GetKeyDown(fireKeyCode) && Time.time >= nextFireTime)
+        float currPlayerHealth = controllerScriptRef.getHealth();
+        if(Input.GetKey(fireKeyCode) && Time.time >= nextFireTime && 
+        currPlayerHealth - basicProjectileCost >= minHealthThreshold) // Prevent player from depleting their own HP too much
         {
             FireBasicProjectile();
         }
@@ -25,7 +32,8 @@ public class FireController : MonoBehaviour
     
     void FireBasicProjectile()
     {
-        GameObject spawnedProjectile = Instantiate<GameObject>(basicProjectilePrefab, transform.position, cameraObject.transform.rotation);
+        GameObject spawnedBasicProjectile = Instantiate<GameObject>(basicProjectilePrefab, transform.position, cameraObject.transform.rotation);
         nextFireTime = Time.time + basicProjectileFireCooldown;
+        controllerScriptRef.applyDamage(basicProjectileCost);
     }
 }

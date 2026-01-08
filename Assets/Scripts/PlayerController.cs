@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 /*
-    This script provides jumping and movement in Unity 3D - Gatsby
+    This script provides jumping and movement in Unity 3D - Gatsby (YT)
 */
 
 public class PlayerController : MonoBehaviour
@@ -29,6 +29,15 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private float raycastDistance;
 
+    // Resource Management
+    [SerializeField] private float healthPoints = 100;
+    [SerializeField] private float regenDelay = 3f;
+    [SerializeField] private float regenTickSpeed = 0.25f;
+    [SerializeField] private HealthBarUI healthBar;
+    private float maxHP;
+    private float startHealthRegeneration = 0f;
+    private float nextTick = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -42,6 +51,10 @@ public class PlayerController : MonoBehaviour
         // Hides the mouse
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Set Max HP
+        maxHP = healthPoints;
+        healthBar.setMaxHealth(maxHP);
     }
 
     void Update()
@@ -65,6 +78,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             groundCheckTimer -= Time.deltaTime;
+        }
+
+        // Regenerate HP up to max if we haven't taken damage recently
+        if (healthPoints < maxHP && Time.time >= startHealthRegeneration && Time.time >= nextTick)
+        {
+            applyHeal(1);
+            nextTick = Time.time + regenTickSpeed;
+            Debug.Log("HP: " + healthPoints);
+        }
+
+        // Game Over 
+        if (healthPoints <= 0)
+        {
+            Debug.Log("Game Over");
         }
     }
     void FixedUpdate()
@@ -124,5 +151,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Health Stuff
 
+    public float getHealth()
+    {
+        return healthPoints;
+    }
+
+    public void applyDamage(float dmg)
+    {
+        healthPoints = Math.Max(healthPoints - dmg, 0f);
+        startHealthRegeneration = Time.time + regenDelay;
+        healthBar.setHealth(healthPoints);
+        Debug.Log("HP: " + healthPoints);
+    }
+    public void applyHeal(float heal)
+    {
+        healthPoints = Math.Min(healthPoints + heal, maxHP);
+        healthBar.setHealth(healthPoints);
+        Debug.Log("HP: " + healthPoints);
+    }
 }

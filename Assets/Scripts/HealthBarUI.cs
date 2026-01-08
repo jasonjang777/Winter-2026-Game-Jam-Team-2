@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class HealthBarUI : MonoBehaviour
+{
+    public float Health, MaxHealth, Width, Height;
+    [SerializeField] private RectTransform healthBar;
+
+    public void setMaxHealth(float maxHealth)
+    {
+        MaxHealth = maxHealth;
+    }
+    
+    public void setHealth(float health)
+    {
+        Health = health;
+        float newWidth = (Health / MaxHealth) * Width;
+        Debug.Log(newWidth);
+        healthBar.sizeDelta = new Vector2(newWidth, Height);
+    }
+}
