@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float healthPoints = 100;
     [SerializeField] private float regenDelay = 3f;
     [SerializeField] private float regenTickSpeed = 0.25f;
+    [SerializeField] private HealthBarUI healthBar;
     private float maxHP;
     private float startHealthRegeneration = 0f;
     private float nextTick = 0f;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
         // Set Max HP
         maxHP = healthPoints;
+        healthBar.setMaxHealth(maxHP);
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
         // Regenerate HP up to max if we haven't taken damage recently
         if (healthPoints < maxHP && Time.time >= startHealthRegeneration && Time.time >= nextTick)
         {
-            healthPoints = Math.Min(healthPoints + 1, maxHP);
+            applyHeal(1);
             nextTick = Time.time + regenTickSpeed;
             Debug.Log("HP: " + healthPoints);
         }
@@ -158,9 +160,15 @@ public class PlayerController : MonoBehaviour
 
     public void applyDamage(float dmg)
     {
-        healthPoints -= dmg;
+        healthPoints = Math.Max(healthPoints - dmg, 0f);
         startHealthRegeneration = Time.time + regenDelay;
+        healthBar.setHealth(healthPoints);
         Debug.Log("HP: " + healthPoints);
     }
-
+    public void applyHeal(float heal)
+    {
+        healthPoints = Math.Min(healthPoints + heal, maxHP);
+        healthBar.setHealth(healthPoints);
+        Debug.Log("HP: " + healthPoints);
+    }
 }
