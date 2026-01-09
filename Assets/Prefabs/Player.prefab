@@ -611,10 +611,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireController
   fireKeyCode: 323
   cameraObject: {fileID: 2405182593357800097}
-  minHealthThreshold: 15
+  minHealthThreshold: -1000
+  weaponSwitchCooldown: 1
   basicProjectilePrefab: {fileID: 7633372355513692726, guid: bbc9a760d8597cc4a88389b1f603a6b5, type: 3}
   basicProjectileFireCooldown: 0.5
   basicProjectileCost: 2.5
+  basicProjectileKeybind: 49
+  platformProjectilePrefab: {fileID: 7633372355513692726, guid: 38406ace70bf234408ea8682d76b3d32, type: 3}
+  spawnedPlatformPrefab: {fileID: 9028181019381526855, guid: 4822dda6592c5c745a28e9aac71583b7, type: 3}
+  platformProjectileFireCooldown: 2
+  platformProjectileCost: 5
+  spawnPlatformCost: 20
+  platformScale: {x: 3, y: 1, z: 3}
+  platformProjectileKeybind: 50
+  spawnPlatformKeybind: 324
   controllerScriptRef: {fileID: 1237715742153778590}
 --- !u!1 &8057227440057548606
 GameObject:
