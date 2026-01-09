@@ -4,11 +4,14 @@ public class BasicProjectile : MonoBehaviour
 {
 
     [SerializeField] private float projectileSpeed = 1f;
-    [SerializeField] private float projectileLifetime = 3f;
+    [SerializeField] private float maxProjectileLifetime = 3f;
+
+    private float startTime;
 
     void Start()
     {
-        Destroy(gameObject, projectileLifetime);
+        startTime = Time.time;
+        Destroy(gameObject, maxProjectileLifetime);
     }
     // Update is called once per frame
     void Update()
@@ -25,5 +28,10 @@ public class BasicProjectile : MonoBehaviour
     {   
         // Debug.Log("platform hit");
         Destroy(gameObject);
+    }
+
+    public float getProjectileLifetime()
+    {
+        return Time.time - startTime;
     }
 }

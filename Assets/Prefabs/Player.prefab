@@ -403,7 +403,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 2999895530176759144}
   MoveSpeed: 5
   jumpForce: 15
-  fallMultiplier: 2.5
+  fallMultiplier: 0.75
   ascendMultiplier: 2
   groundLayer:
     serializedVersion: 2
@@ -622,6 +622,7 @@ MonoBehaviour:
   platformProjectileFireCooldown: 2
   platformProjectileCost: 5
   spawnPlatformCost: 20
+  spawnPlatformInitialDelay: 0.25
   platformScale: {x: 3, y: 1, z: 3}
   platformProjectileKeybind: 50
   spawnPlatformKeybind: 324

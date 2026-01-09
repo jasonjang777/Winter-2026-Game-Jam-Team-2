@@ -26,6 +26,7 @@ public class FireController : MonoBehaviour
     [SerializeField] private float platformProjectileFireCooldown = 2f;
     [SerializeField] private float platformProjectileCost = 5f;
     [SerializeField] private float spawnPlatformCost = 20f;
+    [SerializeField] private float spawnPlatformInitialDelay = 0.25f;
     [SerializeField] private Vector3 platformScale = new Vector3(2f, 2f, 2f);
     [SerializeField] private KeyCode platformProjectileKeybind = KeyCode.Alpha2;
     [SerializeField] private KeyCode spawnPlatformKeybind = KeyCode.Mouse1;
@@ -60,7 +61,7 @@ public class FireController : MonoBehaviour
         }
 
         // Spawn platform from projectile (ENSURE ONLY 1 PLATFORM PROJECTILE IS ACTIVE AT ALL TIMES)
-        if(Input.GetKey(spawnPlatformKeybind) 
+        else if(Input.GetKey(spawnPlatformKeybind) 
         && currPlayerHealth - spawnPlatformCost >= minHealthThreshold)
         {
             SpawnPlatform();
@@ -95,12 +96,15 @@ public class FireController : MonoBehaviour
     void SpawnPlatform()
     {
         GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
-        if(existingPlatformProjectile)
-        {
-            GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, existingPlatformProjectile.transform.rotation);
-            spawnedPlatform.transform.localScale = platformScale;
-            Destroy(existingPlatformProjectile);
-            controllerScriptRef.applyDamage(spawnPlatformCost);
+        if(existingPlatformProjectile) {
+            BasicProjectile ProjectileScript = existingPlatformProjectile.GetComponent<BasicProjectile>();
+            if (ProjectileScript.getProjectileLifetime() >= spawnPlatformInitialDelay)
+            {
+                GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, existingPlatformProjectile.transform.rotation);
+                spawnedPlatform.transform.localScale = platformScale;
+                Destroy(existingPlatformProjectile);
+                controllerScriptRef.applyDamage(spawnPlatformCost);
+            }
         }
     }
 }
