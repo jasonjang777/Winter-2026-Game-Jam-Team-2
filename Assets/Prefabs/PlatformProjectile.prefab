@@ -156,4 +156,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicProjectile
   projectileSpeed: 10
-  projectileLifetime: 3
+  maxProjectileLifetime: 3

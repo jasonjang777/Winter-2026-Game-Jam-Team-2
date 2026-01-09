@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Build;
 using UnityEngine;
 
@@ -33,7 +34,6 @@ public class FireController : MonoBehaviour
 
     // Player Script
     public PlayerController controllerScriptRef;
-
 
     // Update is called once per frame
     void Update()
@@ -93,18 +93,40 @@ public class FireController : MonoBehaviour
         controllerScriptRef.applyDamage(platformProjectileCost);
     }
 
+    bool platformSpawnQueued = false;
     void SpawnPlatform()
     {
         GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
-        if(existingPlatformProjectile) {
+        if(existingPlatformProjectile && !platformSpawnQueued) {
             BasicProjectile ProjectileScript = existingPlatformProjectile.GetComponent<BasicProjectile>();
             if (ProjectileScript.getProjectileLifetime() >= spawnPlatformInitialDelay)
             {
-                GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, existingPlatformProjectile.transform.rotation);
+                Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
+                GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
+                Quaternion.Euler(0, currentRotation.y, 0));
                 spawnedPlatform.transform.localScale = platformScale;
                 Destroy(existingPlatformProjectile);
                 controllerScriptRef.applyDamage(spawnPlatformCost);
             }
+            else
+            {
+                StartCoroutine(SpawnPlatformAfterDelay(existingPlatformProjectile, 
+                spawnPlatformInitialDelay - ProjectileScript.getProjectileLifetime()));
+            }
         }
+    }
+
+    IEnumerator SpawnPlatformAfterDelay(GameObject existingPlatformProjectile, float delay)
+    {
+        platformSpawnQueued = true;
+        yield return new WaitForSeconds(delay);
+        Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
+        GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
+        Quaternion.Euler(0, currentRotation.y, 0));
+        spawnedPlatform.transform.localScale = platformScale;
+        Destroy(existingPlatformProjectile);
+        controllerScriptRef.applyDamage(spawnPlatformCost);
+        platformSpawnQueued = false;
+        yield break;
     }
 }
