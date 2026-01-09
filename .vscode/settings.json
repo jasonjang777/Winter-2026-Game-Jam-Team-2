@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Winter 2026 Game Jam Project.slnx"
+    "dotnet.defaultSolution": "Winter-2026-Game-Jam-Team-2.slnx"
 }
