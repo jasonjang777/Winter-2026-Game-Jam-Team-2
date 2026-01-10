@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float healthPoints = 100;
     [SerializeField] private float regenDelay = 3f;
     [SerializeField] private float regenTickSpeed = 0.25f;
-    [SerializeField] private HealthBarUI healthBar;
+    private HealthBarUI healthBar;
     private float maxHP;
     private float startHealthRegeneration = 0f;
     private float nextTick = 0f;
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         // Set Max HP
+        healthBar = GameObject.Find("UI/HealthBar").GetComponent<HealthBarUI>();
         maxHP = healthPoints;
         healthBar.setMaxHealth(maxHP);
     }
