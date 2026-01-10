@@ -39,14 +39,16 @@ public class FireController : MonoBehaviour
     void Update()
     {
         // Switch Weapons
-        if(activeProjectileCode != 1 && Input.GetKey(basicProjectileKeybind) && Time.time >= nextSwitchTime)
-        {
-            SwitchProjectile(1);
-        }
-        else if(activeProjectileCode != 2 && Input.GetKey(platformProjectileKeybind) && Time.time >= nextSwitchTime)
-        {
-            SwitchProjectile(2);
-        }
+
+        // if(activeProjectileCode != 1 && Input.GetKey(basicProjectileKeybind) && Time.time >= nextSwitchTime)
+        // {
+        //     SwitchProjectile(1);
+        // }
+        // else if(activeProjectileCode != 2 && Input.GetKey(platformProjectileKeybind) && Time.time >= nextSwitchTime)
+        // {
+        //     SwitchProjectile(2);
+        // }
+
         // Fire projectiles
         float currPlayerHealth = controllerScriptRef.getHealth();
         if(Input.GetKey(fireKeyCode) && Time.time >= nextFireTime && activeProjectileCode == 1 &&
@@ -54,18 +56,19 @@ public class FireController : MonoBehaviour
         {
             FireBasicProjectile();
         }
-        else if(Input.GetKey(fireKeyCode) && Time.time >= nextFireTime && activeProjectileCode == 2 &&
-        currPlayerHealth - platformProjectileCost >= minHealthThreshold)
-        {
-            FirePlatformProjectile();
-        }
+        
+        // else if(Input.GetKey(fireKeyCode) && Time.time >= nextFireTime && activeProjectileCode == 2 &&
+        // currPlayerHealth - platformProjectileCost >= minHealthThreshold)
+        // {
+        //     FirePlatformProjectile();
+        // }
 
         // Spawn platform from projectile (ENSURE ONLY 1 PLATFORM PROJECTILE IS ACTIVE AT ALL TIMES)
-        else if(Input.GetKey(spawnPlatformKeybind) 
-        && currPlayerHealth - spawnPlatformCost >= minHealthThreshold)
-        {
-            SpawnPlatform();
-        }
+        // else if(Input.GetKey(spawnPlatformKeybind) 
+        // && currPlayerHealth - spawnPlatformCost >= minHealthThreshold)
+        // {
+        //     SpawnPlatform();
+        // }
     }
     
     void SwitchProjectile(int code)
