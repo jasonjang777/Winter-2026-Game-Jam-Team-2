@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6444766535401473685}
   m_Layer: 7
   m_Name: Projectile1
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,4 +156,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicProjectile
   projectileSpeed: 10
-  projectileLifetime: 2
+  maxProjectileLifetime: 3
