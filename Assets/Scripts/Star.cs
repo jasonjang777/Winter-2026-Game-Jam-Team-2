@@ -22,7 +22,7 @@ public class Star : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             m_Renderer.material = litStar;
-            GameManager.Instance.starLit();
+            GameManager.Instance.StarLit();
             lit = true;
         }
         
