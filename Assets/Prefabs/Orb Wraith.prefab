@@ -196,9 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec35eeda9fb9534fab08b14fa921d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startingHealth: 0
-  playerTransform: {fileID: 0}
   health: 0
+  playerTransform: {fileID: 0}
+  maxHealth: 0
+  attackCooldown: 0
+  attackRange: 0
 --- !u!135 &7748717493522876759
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -232,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4a2b55e2a711c48b4fb0fab7ea5642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startingHealth: 1
-  playerTransform: {fileID: 7479154813129843923, guid: 3291d256782e85a4f80f1a4e42af2978, type: 3}
   health: 0
+  playerTransform: {fileID: 7479154813129843923, guid: 3291d256782e85a4f80f1a4e42af2978, type: 3}
+  maxHealth: 1
+  attackCooldown: 5
+  attackRange: 0
