@@ -70,7 +70,7 @@ public class Wraith : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 
-    public void explode()
+    public void Explode()
     {
         health -= 2;
         if (health <= 0)
