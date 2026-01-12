@@ -24,16 +24,17 @@ public class RedPowerup : MonoBehaviour
             Destroy(effect, 1f);
         }
 
-        // Apply damage to enemies in radius (UNFINISHED)
+        // Apply damage to enemies in radius
 
         Collider[] detectedColliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        // foreach (Collider collider in detectedColliders)
-        // {
-        //     if (collider.gameObject.CompareTag("Enemy"))
-        //     {
-        //         // Do damage to hit enemy
-        //     }
-        // }
+        foreach (Collider collider in detectedColliders)
+        {
+            if (collider.gameObject.CompareTag("Enemy"))
+            {
+                Wraith wraithScript = collider.gameObject.GetComponent<Wraith>();
+                wraithScript.Explode();
+            }
+        }
 
         Destroy(gameObject);
     }
