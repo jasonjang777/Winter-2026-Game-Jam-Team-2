@@ -308,7 +308,10 @@ MonoBehaviour:
   healthPoints: 100
   regenDelay: 3
   regenTickSpeed: 0.25
-  healthBar: {fileID: 0}
+  launchReducedDrag: 0.95
+  launchStandardDrag: 0.925
+  launchIncreasedDrag: 0.9
+  launchDuration: 0.15
 --- !u!1 &7345685887700086206
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,15 +423,6 @@ MonoBehaviour:
   basicProjectileFireCooldown: 0.5
   basicProjectileCost: 2.5
   basicProjectileKeybind: 49
-  platformProjectilePrefab: {fileID: 7633372355513692726, guid: 38406ace70bf234408ea8682d76b3d32, type: 3}
-  spawnedPlatformPrefab: {fileID: 9028181019381526855, guid: 4822dda6592c5c745a28e9aac71583b7, type: 3}
-  platformProjectileFireCooldown: 2
-  platformProjectileCost: 5
-  spawnPlatformCost: 20
-  spawnPlatformInitialDelay: 0.25
-  platformScale: {x: 3, y: 1, z: 3}
-  platformProjectileKeybind: 50
-  spawnPlatformKeybind: 324
   controllerScriptRef: {fileID: 1237715742153778590}
 --- !u!1 &8501311201013813061
 GameObject:

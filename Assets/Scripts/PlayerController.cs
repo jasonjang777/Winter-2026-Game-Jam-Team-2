@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 /*
@@ -38,6 +39,16 @@ public class PlayerController : MonoBehaviour
     private float startHealthRegeneration = 0f;
     private float nextTick = 0f;
 
+    // Blue Powerup Launch
+    [SerializeField] private float launchReducedDrag = 0.9f;
+    [SerializeField] private float launchStandardDrag = 0.8f;
+    [SerializeField] private float launchIncreasedDrag = 0.7f;
+    [SerializeField] private float launchPhysicsMinDuration = 0.5f;
+    [SerializeField] private float launchDisableGroundCheckDuration = 0.15f;
+    private bool launched = false;
+    private bool launchPhysics = false;
+    private bool launchDisableGroundCheck = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -65,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         RotateCamera();
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !launched)
         {
             Jump();
         }
@@ -86,21 +97,20 @@ public class PlayerController : MonoBehaviour
         {
             applyHeal(1);
             nextTick = Time.time + regenTickSpeed;
-            Debug.Log("HP: " + healthPoints);
+            // Debug.Log("HP: " + healthPoints);
         }
 
         // Game Over 
         if (healthPoints <= 0)
         {
-            Debug.Log("Game Over");
+            // Debug.Log("Game Over");
         }
     }
     void FixedUpdate()
     {
-        MovePlayer();
+        MovePlayer();   
         ApplyJumpPhysics();
     }
-
     void MovePlayer()
     {
 
@@ -109,12 +119,77 @@ public class PlayerController : MonoBehaviour
 
         // Apply movement to the Rigidbody
         Vector3 velocity = rb.linearVelocity;
-        velocity.x = targetVelocity.x;
-        velocity.z = targetVelocity.z;
+
+        // If moving faster than normal (launching), use different physics
+        if (Math.Abs(velocity.x) + Math.Abs(velocity.z) > MoveSpeed * Math.Sqrt(2)) 
+        {
+            launchPhysics = true;
+            // Debug.Log("Using launch movement");
+            // Debug.Log("X velocity: " + velocity.x);
+            // Debug.Log("z velocity: " + velocity.z);
+        }
+        else
+        {
+            launchPhysics = launched;
+            // Debug.Log("Reverting to normal movement");
+            // Debug.Log("X velocity: " + velocity.x);
+            // Debug.Log("z velocity: " + velocity.z);
+        }
+
+        // velocity.x = targetVelocity.x;
+        if (!launchPhysics)
+        {
+            velocity.x = targetVelocity.x;
+        }
+        else if (targetVelocity.x == 0)
+        {   
+            velocity.x = velocity.x * launchStandardDrag;
+        }
+        else if (velocity.x > 0 && targetVelocity.x > 0)
+        {   
+            velocity.x = Math.Max(velocity.x * launchReducedDrag, targetVelocity.x);
+        }
+        else if (velocity.x < 0 && targetVelocity.x < 0)
+        {   
+            velocity.x = Math.Min(velocity.x * launchReducedDrag, targetVelocity.x);
+        }
+        else
+        {
+            //velocity.x = Math.Clamp(velocity.x + targetVelocity.x, -1 * Math.Abs(targetVelocity.x), Math.Abs(targetVelocity.x));
+            velocity.x = velocity.x * launchIncreasedDrag;
+        }
+
+        // velocity.z = targetVelocity.z;
+        
+        // if (isGrounded)
+        // {
+        //    velocity.z = targetVelocity.z; 
+        
+        if (!launchPhysics)
+        {
+            velocity.z = targetVelocity.z;
+        }
+        else if (targetVelocity.z == 0)
+        {   
+            velocity.z = velocity.z * launchStandardDrag;
+        }
+        else if (velocity.z > 0 && targetVelocity.z > 0)
+        {   
+            velocity.z = Math.Max(velocity.z * launchReducedDrag, targetVelocity.z);
+        }
+        else if (velocity.x < 0 && targetVelocity.x < 0)
+        {   
+            velocity.z = Math.Min(velocity.z * launchReducedDrag, targetVelocity.z);
+        }
+        else
+        {
+            //velocity.x = Math.Clamp(velocity.x + targetVelocity.x, -1 * Math.Abs(targetVelocity.x), Math.Abs(targetVelocity.x));
+            velocity.z = velocity.z * launchIncreasedDrag;
+        }
         rb.linearVelocity = velocity;
 
         // If we aren't moving and are on the ground, stop velocity so we don't slide
-        if (isGrounded && moveHorizontal == 0 && moveForward == 0)
+        if (isGrounded && moveHorizontal == 0 && moveForward == 0 && !launchPhysics)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
@@ -152,6 +227,94 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Blue Powerup Stuff
+
+    // public void Launch(float lockControlsDelay)
+    // {
+    //     StartCoroutine(ApplyLaunch(lockControlsDelay));
+    // }
+
+    // IEnumerator ApplyLaunch(float lockControlsDelay)
+    // {
+    //     launched = true;
+    //     yield return new WaitForSeconds(lockControlsDelay);
+    //     launched = false;
+    //     yield break;
+    // }
+
+    
+    // private void LaunchLockMovement()
+    // {
+    //     launched = true;
+    //     isGrounded = false;
+    // }
+
+    // private void LaunchResumeMovement()
+    // {
+    //     launched = false;
+    // }
+
+    private Coroutine runningPullCoroutine = null;
+    public void StartPullCoroutine(Vector3 pos, float maxForceMagnitude, float minForceMagnitude,
+    float startForceScalingDistance, float endForceScalingDistance, float horizontalForceMultiplier, float minControlLock, float maxControlLock)
+    {
+        if (runningPullCoroutine != null)
+        {
+            StopCoroutine(runningPullCoroutine);
+        }
+        runningPullCoroutine = StartCoroutine(PullPlayerTowardsPosition(pos, maxForceMagnitude, minForceMagnitude,
+        startForceScalingDistance,  endForceScalingDistance,  horizontalForceMultiplier, minControlLock,  maxControlLock));
+
+    }
+
+    public void StopPullCoroutine()
+    {
+        if (runningPullCoroutine != null)
+        {
+            StopCoroutine(runningPullCoroutine);
+            runningPullCoroutine = null;
+        }
+    }
+    // if anyone comes across this: i am deeply sorry for this abomination
+    IEnumerator PullPlayerTowardsPosition(Vector3 pos, float maxForceMagnitude, float minForceMagnitude,
+    float startForceScalingDistance, float endForceScalingDistance, float horizontalForceMultiplier, float minControlLock, float maxControlLock)
+    {
+        launched = true;
+        launchDisableGroundCheck = true;
+
+        Vector3 direction = pos- transform.position;
+        Vector3 normalizedDirection = Vector3.Normalize(direction);
+        Vector3 actualLaunchDirection = normalizedDirection;
+        // actualLaunchDirection.y = 1;
+
+        // Pull force scales linearly with player's distance from powerup
+        float maxForceToAdd = maxForceMagnitude - minForceMagnitude;
+        float maxControlLockToAdd = maxControlLock - minControlLock;
+        float distanceToPlayer = Vector3.Distance(pos, transform.position);
+        float maxDistaceAdjusted = endForceScalingDistance - startForceScalingDistance;
+        float distanceToPlayerAdjusted = distanceToPlayer - startForceScalingDistance;
+        float maxForcePercentage = Mathf.Clamp(distanceToPlayerAdjusted/maxDistaceAdjusted, 0, 1);
+        float actualForceToAdd = minForceMagnitude + (maxForcePercentage * maxForceToAdd);
+        float actualControlLock = minControlLock + (maxForcePercentage * maxControlLock);
+
+        Debug.Log("Magnitude of force added: " + actualForceToAdd);
+        Debug.Log("Duration of movement lock: " + actualControlLock);
+        Vector3 launchVector = actualForceToAdd * actualLaunchDirection;
+        launchVector.x *= horizontalForceMultiplier;
+        if (launchVector.y < 0)
+        {
+            launchVector.y = 0;
+        }
+        launchVector.z *= horizontalForceMultiplier;
+        rb.linearVelocity = launchVector;
+        yield return new WaitForSeconds(launchDisableGroundCheckDuration);
+        launchDisableGroundCheck = false;
+        yield return new WaitForSeconds(launchPhysicsMinDuration - launchDisableGroundCheckDuration);
+        // yield return new WaitUntil(() => playerRB.linearVelocity.magnitude <= minLaunchSpeedThreshold);
+        launched = false;
+        yield break;
+    }
+    
     // Health Stuff
 
     public float getHealth()
@@ -164,12 +327,12 @@ public class PlayerController : MonoBehaviour
         healthPoints = Math.Max(healthPoints - dmg, 0f);
         startHealthRegeneration = Time.time + regenDelay;
         healthBar.setHealth(healthPoints);
-        Debug.Log("HP: " + healthPoints);
+        // Debug.Log("HP: " + healthPoints);
     }
     public void applyHeal(float heal)
     {
         healthPoints = Math.Min(healthPoints + heal, maxHP);
         healthBar.setHealth(healthPoints);
-        Debug.Log("HP: " + healthPoints);
+        // Debug.Log("HP: " + healthPoints);
     }
 }

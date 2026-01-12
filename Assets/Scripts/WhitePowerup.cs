@@ -30,7 +30,7 @@ public class WhitePowerup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerProjectile"))
         {   
-            Debug.Log("White Powerup Hit");
+            //Debug.Log("White Powerup Hit");
             controllerScriptRef.applyHeal(healAmount);
             Destroy(gameObject);
         }

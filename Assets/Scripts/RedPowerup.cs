@@ -11,7 +11,7 @@ public class RedPowerup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
-            Debug.Log("Red Powerup Hit");
+            // Debug.Log("Red Powerup Hit");
             Explode();
         }
     }
