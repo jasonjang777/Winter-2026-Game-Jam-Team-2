@@ -158,4 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPowerup
   explosionPrefab: {fileID: 5856092901181479170, guid: 71dd95ee9fd7f83488cd81a0a0646de6, type: 3}
-  explosionRadius: 20
+  explosionRadius: 10

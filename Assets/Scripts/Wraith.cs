@@ -2,27 +2,21 @@ using UnityEngine;
 
 public class Wraith : MonoBehaviour
 {
-    public int health;
-    public Transform playerTransform;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] protected int startingHealth;
+    [SerializeField] protected Transform playerTransform;
+    [HideInInspector] public int health;
+
+    protected void Start()
     {
-        health = 3;
-        playerTransform = GameManager.Instance.player.transform;
+        health = startingHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        FacePlayer();
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "PlayerProjectile")
         {
             --health;
+            Debug.Log(gameObject.name + " now has " + health + " HP!");
             if (health <= 0)
             {
                 Destroy(gameObject);
@@ -30,18 +24,10 @@ public class Wraith : MonoBehaviour
 
         }
     }
-
-    private void FacePlayer()
-    {
-        Quaternion look = Quaternion.LookRotation(playerTransform.position - transform.position);
-
-        // For Melee and Ranged Wraiths only (Only look at player on one axis):
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
-    }
-
-    public void explode()
+    public void Explode()
     {
         health -= 2;
+        Debug.Log(gameObject.name + " now has " + health + " HP!");
         if (health <= 0)
         {
             Destroy(gameObject);
