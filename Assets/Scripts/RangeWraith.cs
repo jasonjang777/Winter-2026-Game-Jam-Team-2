@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class RangeWraith : MonoBehaviour
+public class RangeWraith : Wraith
 {
-    public int health;
-    public Transform playerTransform;
+    // public int health;
+    // public Transform playerTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        health = 2;
-        playerTransform = GameManager.Instance.player.transform;
-    }
+    // void Start()
+    // {
+    //     health = startingHealth;
+    //     // playerTransform = GameManager.Instance.player.transform;
+    // }
 
     // Update is called once per frame
     void Update()
@@ -18,18 +18,18 @@ public class RangeWraith : MonoBehaviour
         FacePlayer();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "PlayerProjectile")
-        {
-            --health;
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     if (collision.gameObject.tag == "PlayerProjectile")
+    //     {
+    //         --health;
+    //         if (health <= 0)
+    //         {
+    //             Destroy(gameObject);
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     private void FacePlayer()
     {
@@ -39,13 +39,13 @@ public class RangeWraith : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 
-    public void explode()
-    {
-        health -= 2;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+    // public void explode()
+    // {
+    //     health -= 2;
+    //     if (health <= 0)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
 
 }
