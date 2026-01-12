@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Wraith : MonoBehaviour
+public class RangeWraith : MonoBehaviour
 {
     public int health;
     public Transform playerTransform;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = 3;
+        health = 2;
         playerTransform = GameManager.Instance.player.transform;
     }
 

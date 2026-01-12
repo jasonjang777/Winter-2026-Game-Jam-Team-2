@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Wraith : MonoBehaviour
+public class OrbWraith : MonoBehaviour
 {
     public int health;
     public Transform playerTransform;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = 3;
+        health = 1;
         playerTransform = GameManager.Instance.player.transform;
     }
 
@@ -35,8 +35,8 @@ public class Wraith : MonoBehaviour
     {
         Quaternion look = Quaternion.LookRotation(playerTransform.position - transform.position);
 
-        // For Melee and Ranged Wraiths only (Only look at player on one axis):
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
+        // For orb only (Only look at player on one axis):
+        transform.rotation = look;
     }
 
     public void explode()
@@ -47,5 +47,4 @@ public class Wraith : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

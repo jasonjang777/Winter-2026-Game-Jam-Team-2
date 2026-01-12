@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             starCount = GameObject.FindGameObjectsWithTag("Star").Length-1;
+            player = FindAnyObjectByType<PlayerController>();
             //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
         }
         else
