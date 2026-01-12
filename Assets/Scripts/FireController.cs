@@ -22,15 +22,15 @@ public class FireController : MonoBehaviour
 
 
     // Platform Gun
-    [SerializeField] private GameObject platformProjectilePrefab;   
-    [SerializeField] private GameObject spawnedPlatformPrefab;   
-    [SerializeField] private float platformProjectileFireCooldown = 2f;
-    [SerializeField] private float platformProjectileCost = 5f;
-    [SerializeField] private float spawnPlatformCost = 20f;
-    [SerializeField] private float spawnPlatformInitialDelay = 0.25f;
-    [SerializeField] private Vector3 platformScale = new Vector3(2f, 2f, 2f);
-    [SerializeField] private KeyCode platformProjectileKeybind = KeyCode.Alpha2;
-    [SerializeField] private KeyCode spawnPlatformKeybind = KeyCode.Mouse1;
+    // [SerializeField] private GameObject platformProjectilePrefab;   
+    // [SerializeField] private GameObject spawnedPlatformPrefab;   
+    // [SerializeField] private float platformProjectileFireCooldown = 2f;
+    // [SerializeField] private float platformProjectileCost = 5f;
+    // [SerializeField] private float spawnPlatformCost = 20f;
+    // [SerializeField] private float spawnPlatformInitialDelay = 0.25f;
+    // [SerializeField] private Vector3 platformScale = new Vector3(2f, 2f, 2f);
+    // [SerializeField] private KeyCode platformProjectileKeybind = KeyCode.Alpha2;
+    // [SerializeField] private KeyCode spawnPlatformKeybind = KeyCode.Mouse1;
 
     // Player Script
     public PlayerController controllerScriptRef;
@@ -84,52 +84,52 @@ public class FireController : MonoBehaviour
         controllerScriptRef.applyDamage(basicProjectileCost);
     }
 
-    void FirePlatformProjectile()
-    {
-        GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
-        if(existingPlatformProjectile)
-        {
-            Destroy(existingPlatformProjectile);
-        }
-        GameObject spawnedPlatformProjectile = Instantiate<GameObject>(platformProjectilePrefab, transform.position, cameraObject.transform.rotation);
-        nextFireTime = Time.time + platformProjectileFireCooldown;
-        controllerScriptRef.applyDamage(platformProjectileCost);
-    }
+    // void FirePlatformProjectile()
+    // {
+    //     GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
+    //     if(existingPlatformProjectile)
+    //     {
+    //         Destroy(existingPlatformProjectile);
+    //     }
+    //     GameObject spawnedPlatformProjectile = Instantiate<GameObject>(platformProjectilePrefab, transform.position, cameraObject.transform.rotation);
+    //     nextFireTime = Time.time + platformProjectileFireCooldown;
+    //     controllerScriptRef.applyDamage(platformProjectileCost);
+    // }
 
-    bool platformSpawnQueued = false;
-    void SpawnPlatform()
-    {
-        GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
-        if(existingPlatformProjectile && !platformSpawnQueued) {
-            BasicProjectile ProjectileScript = existingPlatformProjectile.GetComponent<BasicProjectile>();
-            if (ProjectileScript.getProjectileLifetime() >= spawnPlatformInitialDelay)
-            {
-                Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
-                GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
-                Quaternion.Euler(0, currentRotation.y, 0));
-                spawnedPlatform.transform.localScale = platformScale;
-                Destroy(existingPlatformProjectile);
-                controllerScriptRef.applyDamage(spawnPlatformCost);
-            }
-            else
-            {
-                StartCoroutine(SpawnPlatformAfterDelay(existingPlatformProjectile, 
-                spawnPlatformInitialDelay - ProjectileScript.getProjectileLifetime()));
-            }
-        }
-    }
+    // bool platformSpawnQueued = false;
+    // void SpawnPlatform()
+    // {
+    //     GameObject existingPlatformProjectile = GameObject.Find("PlatformProjectile(Clone)");
+    //     if(existingPlatformProjectile && !platformSpawnQueued) {
+    //         BasicProjectile ProjectileScript = existingPlatformProjectile.GetComponent<BasicProjectile>();
+    //         if (ProjectileScript.getProjectileLifetime() >= spawnPlatformInitialDelay)
+    //         {
+    //             Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
+    //             GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
+    //             Quaternion.Euler(0, currentRotation.y, 0));
+    //             spawnedPlatform.transform.localScale = platformScale;
+    //             Destroy(existingPlatformProjectile);
+    //             controllerScriptRef.applyDamage(spawnPlatformCost);
+    //         }
+    //         else
+    //         {
+    //             StartCoroutine(SpawnPlatformAfterDelay(existingPlatformProjectile, 
+    //             spawnPlatformInitialDelay - ProjectileScript.getProjectileLifetime()));
+    //         }
+    //     }
+    // }
 
-    IEnumerator SpawnPlatformAfterDelay(GameObject existingPlatformProjectile, float delay)
-    {
-        platformSpawnQueued = true;
-        yield return new WaitForSeconds(delay);
-        Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
-        GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
-        Quaternion.Euler(0, currentRotation.y, 0));
-        spawnedPlatform.transform.localScale = platformScale;
-        Destroy(existingPlatformProjectile);
-        controllerScriptRef.applyDamage(spawnPlatformCost);
-        platformSpawnQueued = false;
-        yield break;
-    }
+    // IEnumerator SpawnPlatformAfterDelay(GameObject existingPlatformProjectile, float delay)
+    // {
+    //     platformSpawnQueued = true;
+    //     yield return new WaitForSeconds(delay);
+    //     Vector3 currentRotation = existingPlatformProjectile.transform.rotation.eulerAngles;
+    //     GameObject spawnedPlatform = Instantiate<GameObject>(spawnedPlatformPrefab, existingPlatformProjectile.transform.position, 
+    //     Quaternion.Euler(0, currentRotation.y, 0));
+    //     spawnedPlatform.transform.localScale = platformScale;
+    //     Destroy(existingPlatformProjectile);
+    //     controllerScriptRef.applyDamage(spawnPlatformCost);
+    //     platformSpawnQueued = false;
+    //     yield break;
+    // }
 }
