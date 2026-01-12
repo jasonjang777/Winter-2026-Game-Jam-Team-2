@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wraith
       objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: attackCooldown
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -411,7 +419,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orb Wraith
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 87854370320286407, guid: a2900b31b6088624e84a9893a9e50e92, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
