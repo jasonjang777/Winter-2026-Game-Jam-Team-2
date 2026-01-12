@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class MeleeWraith : Wraith
 {
-
+    [Header("Temp Visual Indicator")]
+    [SerializeField] GameObject attackIndicator;
+    private float distance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // void Start()
     // {
@@ -11,39 +13,31 @@ public class MeleeWraith : Wraith
     // }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        FacePlayer();
+        base.Update();
+        distance = (playerTransform.position - transform.position).magnitude;
+        //Temp Code until we have animations, hence hardcoded numbers
+        if (timer > attackCooldown & distance < attackRange)
+        {
+            timer = 0;
+            attacking = true;
+            GameManager.Instance.player.applyDamage(attackDamage);
+        }
+        if (timer > 1 & attacking)
+        {
+            attacking = false;
+        }
+        if (attacking)
+        {
+            attackIndicator.SetActive(true);
+        }
+        else
+        {
+            attackIndicator.SetActive(false);
+        }
+        // End of "Temp" Code
     }
 
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.tag == "PlayerProjectile")
-    //     {
-    //         --health;
-    //         if (health <= 0)
-    //         {
-    //             Destroy(gameObject);
-    //         }
-
-    //     }
-    // }
-
-    private void FacePlayer()
-    {
-        Quaternion look = Quaternion.LookRotation(playerTransform.position - transform.position);
-
-        // For Melee and Ranged Wraiths only (Only look at player on one axis):
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
-    }
-
-    // public void explode()
-    // {
-    //     health -= 2;
-    //     if (health <= 0)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
 
 }

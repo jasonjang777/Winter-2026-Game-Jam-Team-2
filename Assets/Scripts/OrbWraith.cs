@@ -13,38 +13,14 @@ public class OrbWraith : Wraith
     // }
 
     // Update is called once per frame
-    void Update()
-    {
-        FacePlayer();
-    }
 
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.tag == "PlayerProjectile")
-    //     {
-    //         --health;
-    //         if (health <= 0)
-    //         {
-    //             Destroy(gameObject);
-    //         }
 
-    //     }
-    // }
 
-    private void FacePlayer()
+    public override void FacePlayer()
     {
         Quaternion look = Quaternion.LookRotation(playerTransform.position - transform.position);
-
-        // For orb only (Only look at player on one axis):
         transform.rotation = look;
     }
 
-    // public void explode()
-    // {
-    //     health -= 2;
-    //     if (health <= 0)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
+
 }

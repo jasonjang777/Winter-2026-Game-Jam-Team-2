@@ -411,9 +411,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   health: 0
   playerTransform: {fileID: 0}
+  maxHealth: 3
   attackCooldown: 5
-  attackRange: 2
   attackIndicator: {fileID: 5694714393845219676}
+  attackRange: 2
 --- !u!136 &5716219866469498554
 CapsuleCollider:
   m_ObjectHideFlags: 0
