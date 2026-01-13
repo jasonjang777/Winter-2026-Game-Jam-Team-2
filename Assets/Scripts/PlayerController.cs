@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -48,6 +49,9 @@ public class PlayerController : MonoBehaviour
     private bool launched = false;
     private bool launchPhysics = false;
     private bool launchDisableGroundCheck = false;
+
+    // Platform Detection (for enemy aggro)
+    [SerializeField] private float platformRaycastDist = 3f;
 
     void Start()
     {
@@ -334,5 +338,17 @@ public class PlayerController : MonoBehaviour
         healthPoints = Math.Min(healthPoints + heal, maxHP);
         healthBar.setHealth(healthPoints);
         // Debug.Log("HP: " + healthPoints);
+    }
+
+    // Enemy player detection
+    public GameObject DetectCurrentPlatform()
+    {
+        RaycastHit hit;
+        LayerMask mask = LayerMask.GetMask("Ground");
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, platformRaycastDist, mask))
+        {
+            return hit.collider.gameObject.transform.parent.gameObject;
+        }
+        return null;
     }
 }
