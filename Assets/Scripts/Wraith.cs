@@ -1,11 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Wraith : MonoBehaviour
 {
     [HideInInspector] public int health;
     [HideInInspector] public Transform playerTransform;
     protected float timer;
+    protected float distance;
     [Header("Starting Health")]
     [SerializeField] protected int maxHealth;
     [Header("Attack Parameters")]
@@ -29,7 +32,12 @@ public class Wraith : MonoBehaviour
     public virtual void Update()
     {
         timer += Time.deltaTime;
+        distance = (playerTransform.position - transform.position).magnitude;
         FacePlayer();
+        if (timer > attackCooldown & distance < attackRange)
+        {
+            Attack();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,6 +66,12 @@ public class Wraith : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public virtual void Attack()
+    {
+        timer = 0;
+        attacking = true;
     }
 
 }

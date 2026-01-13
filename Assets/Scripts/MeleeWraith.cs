@@ -4,7 +4,7 @@ public class MeleeWraith : Wraith
 {
     [Header("Temp Visual Indicator")]
     [SerializeField] GameObject attackIndicator;
-    private float distance;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // void Start()
     // {
@@ -16,14 +16,8 @@ public class MeleeWraith : Wraith
     public override void Update()
     {
         base.Update();
-        distance = (playerTransform.position - transform.position).magnitude;
+        
         //Temp Code until we have animations, hence hardcoded numbers
-        if (timer > attackCooldown & distance < attackRange)
-        {
-            timer = 0;
-            attacking = true;
-            GameManager.Instance.player.applyDamage(attackDamage);
-        }
         if (timer > 1 & attacking)
         {
             attacking = false;
@@ -39,5 +33,9 @@ public class MeleeWraith : Wraith
         // End of "Temp" Code
     }
 
-
+    public override void Attack()
+    {
+        base.Attack();
+        GameManager.Instance.player.applyDamage(attackDamage);
+    }
 }

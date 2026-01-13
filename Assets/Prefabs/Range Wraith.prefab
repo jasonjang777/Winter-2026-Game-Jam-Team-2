@@ -222,7 +222,10 @@ MonoBehaviour:
   playerTransform: {fileID: 7479154813129843923, guid: 3291d256782e85a4f80f1a4e42af2978, type: 3}
   maxHealth: 2
   attackCooldown: 5
-  attackRange: 0
+  attackRange: 5
+  attackDamage: 10
+  wraithProjectile: {fileID: 4717610675454632132, guid: bc8628670ae6f2b4687eecefe055908c, type: 3}
+  projectileOrigin: {fileID: 2894878364954331399}
 --- !u!1001 &6059410242086694507
 PrefabInstance:
   m_ObjectHideFlags: 0
