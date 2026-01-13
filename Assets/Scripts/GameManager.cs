@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
        currentState = GameState.Won;
-        SceneManager.LoadScene("Win");
+        SceneManager.LoadScene("Enemies");
     }
 
     private void Lose()
