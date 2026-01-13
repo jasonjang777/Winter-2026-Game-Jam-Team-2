@@ -1,15 +1,17 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public UnityEngine.SceneManagement.Scene nextScene;
     [HideInInspector] public PlayerController player;
     private int starCount;
    // private int enemyCount;
     public enum GameState {Lost, InProgress, Won };
     public GameState currentState;
-
+    
     //A Class for loading between scenes and managing certain game aspects (Scene transitions and Game states)
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
        currentState = GameState.Won;
+        SceneManager.LoadScene(nextScene.name);
     }
 
     private void Lose()

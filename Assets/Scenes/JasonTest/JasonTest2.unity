@@ -1109,6 +1109,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4666849017128198222, guid: 8f867b4a5cd8e7a429dc0b518f983e7c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2904139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4666849017128198222, guid: 8f867b4a5cd8e7a429dc0b518f983e7c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2904139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4666849017128198222, guid: 8f867b4a5cd8e7a429dc0b518f983e7c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2904139
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

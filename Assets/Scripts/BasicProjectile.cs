@@ -3,7 +3,7 @@ using UnityEngine;
 public class BasicProjectile : MonoBehaviour
 {
 
-    [SerializeField] private float projectileSpeed = 1f;
+    [SerializeField] private float projectileSpeed = 3f;
     [SerializeField] private float maxProjectileLifetime = 3f;
 
     private float startTime;
