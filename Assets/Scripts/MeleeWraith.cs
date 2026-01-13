@@ -36,8 +36,9 @@ public class MeleeWraith : Wraith
 
     public void FixedUpdate()
     {
-        // If player is on same platform, move towards them
-        if (GameManager.Instance.player.DetectCurrentPlatform() == getCurrentPlatform())
+        // If player is on same platform & wraith is facing player, move towards them
+        if ((GameManager.Instance.player.DetectCurrentPlatform() == getCurrentPlatform() || 
+        distance <= detectionRange) && Mathf.Abs(Quaternion.Dot(targetRotation, transform.rotation)) > 0.99f)
         {
             // Debug.Log("Player Detected");
             // Debug.Log(horizontalDirectionToPlayer);
@@ -49,17 +50,33 @@ public class MeleeWraith : Wraith
                 // Debug.Log("Moving towards player");
                 Debug.DrawRay(transform.position + (transform.forward * groundCheckForwardOffset), Vector3.down * hit.distance, 
                 Color.green, 0.1f);
+                // Debug.Log("Enemy moving");
                 rb.MovePosition(transform.position + horizontalDirectionToPlayer * Time.fixedDeltaTime * moveSpeed);
+                lastMoved = Time.time;
             }
-            else
-            {
-                // Debug.Log("Not moving towards player");
-                Debug.DrawRay(transform.position + (transform.forward * groundCheckForwardOffset), Vector3.down * ((enemyHeight / 2) + groundCheckDistance), 
-                Color.red, 0.1f);
-                // Debug.DrawRay(transform.position, groundCheckRotation * Vector3.down * ((enemyHeight / 2) + groundCheckDistance), 
-                // Color.red, 0.1f);
-            }
+            // else
+            // {
+            //     // Debug.Log("Not moving towards player");
+            //     Debug.DrawRay(transform.position + (transform.forward * groundCheckForwardOffset), Vector3.down * ((enemyHeight / 2) + groundCheckDistance), 
+            //     Color.red, 0.1f);
+            //     // Debug.DrawRay(transform.position, groundCheckRotation * Vector3.down * ((enemyHeight / 2) + groundCheckDistance), 
+            //     // Color.red, 0.1f);
+            // }
         }
+        else if (Mathf.Abs(Quaternion.Dot(targetRotation, transform.rotation)) > 0.99f) // Wander behavior
+        {
+            LayerMask mask = LayerMask.GetMask("Ground");
+            if (Physics.Raycast(transform.position + (transform.forward * groundCheckForwardOffset), Vector3.down,
+            out RaycastHit hit, (enemyHeight / 2) + groundCheckDistance, mask))
+            {
+                Debug.DrawRay(transform.position + (transform.forward * groundCheckForwardOffset), Vector3.down * hit.distance, 
+                Color.green, 0.1f);
+                // Debug.Log("Enemy moving");
+                rb.MovePosition(transform.position + moveSpeed * Time.fixedDeltaTime * transform.forward);
+                nextRandomRotation = Time.time + randomRotationCooldown;
+                lastMoved = Time.time;
+            }
+        } 
     }
 
     public override void Attack()

@@ -17,7 +17,17 @@ public class Wraith : MonoBehaviour
     [SerializeField] protected float attackRange;
     [SerializeField] protected float attackDamage;
     [SerializeField] protected float moveSpeed;
-
+    [SerializeField] protected float detectionRange;
+    [SerializeField] protected float turningRate;
+    [SerializeField] protected float randomRotationCooldown;
+    [SerializeField] protected float minRandomRotationStandard;
+    [SerializeField] protected float maxRandomRotationStandard;
+    [SerializeField] protected float minRandomRotationIncreased;
+    [SerializeField] protected float maxRandomRotationIncreased;
+    [SerializeField] protected float increasdRotationTimeThreshold;
+    protected Quaternion targetRotation = Quaternion.Euler(0, 0, 0);
+    protected float nextRandomRotation = 0f;
+    protected float lastMoved = 0f;
     protected bool attacking;
 
     // Ground check stuff (so it doesn't just walk off the platform while moving around)
@@ -49,7 +59,16 @@ public class Wraith : MonoBehaviour
         Vector3 rawDirectionToPlayer = playerTransform.position - transform.position;
         rawDirectionToPlayer.y = 0;
         horizontalDirectionToPlayer = Vector3.Normalize(rawDirectionToPlayer);
-        FacePlayer();
+        if (GameManager.Instance.player.DetectCurrentPlatform() == getCurrentPlatform() || 
+        distance <= detectionRange)
+        {
+            FacePlayer();
+        }
+        else
+        {
+            FaceRandomDirection();
+        }
+
         if (timer > attackCooldown & distance < attackRange)
         {
             Attack();
@@ -72,7 +91,30 @@ public class Wraith : MonoBehaviour
     public virtual void FacePlayer()
     {
         Quaternion look = Quaternion.LookRotation(playerTransform.position - transform.position);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
+        targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, look.eulerAngles.y, transform.rotation.eulerAngles.z);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turningRate * Time.deltaTime);
+    }
+
+    public void FaceRandomDirection()
+    {
+        if (Time.time >= nextRandomRotation)
+        {
+            if (Time.time - lastMoved < increasdRotationTimeThreshold)
+            {
+                // targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Random.Range(minRandomRotationStandard, maxRandomRotationStandard), 
+                // transform.rotation.eulerAngles.z);
+                targetRotation *= Quaternion.Euler(0, Random.Range(minRandomRotationStandard, maxRandomRotationStandard), 0);
+            }
+            else
+            {
+                // targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Random.Range(minRandomRotationIncreased, maxRandomRotationIncreased), 
+                // transform.rotation.eulerAngles.z);
+                targetRotation *= Quaternion.Euler(0, Random.Range(minRandomRotationIncreased, maxRandomRotationIncreased), 0);
+            }
+           
+            nextRandomRotation = Time.time + randomRotationCooldown;
+        }
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turningRate * Time.deltaTime); 
     }
 
     public void Explode()

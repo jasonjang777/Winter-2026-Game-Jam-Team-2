@@ -417,8 +417,16 @@ MonoBehaviour:
   attackRange: 2
   attackDamage: 20
   moveSpeed: 3
+  detectionRange: 10
+  turningRate: 720
+  randomRotationCooldown: 2
+  minRandomRotationStandard: 15
+  maxRandomRotationStandard: 345
+  minRandomRotationIncreased: 170
+  maxRandomRotationIncreased: 190
+  increasdRotationTimeThreshold: 4
   groundCheckDistance: 0.3
-  groundCheckAngle: -75
+  groundCheckForwardOffset: 1
   attackIndicator: {fileID: 5694714393845219676}
 --- !u!136 &5716219866469498554
 CapsuleCollider:
