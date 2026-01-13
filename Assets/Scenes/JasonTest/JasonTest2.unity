@@ -1171,6 +1171,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Wraith
       objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: groundCheckAngle
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: maxRandomRotationStandard
+      value: 345
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: minRandomRotationStandard
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: maxRandomRotationIncreased
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146471475829848707, guid: d83aa4deb54bebf499c29f3bb068d2e4, type: 3}
+      propertyPath: minRandomRotationIncreased
+      value: 170
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

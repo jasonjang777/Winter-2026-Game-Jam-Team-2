@@ -314,6 +314,7 @@ MonoBehaviour:
   launchIncreasedDrag: 0.9
   launchPhysicsMinDuration: 0.5
   launchDisableGroundCheckDuration: 0.15
+  platformRaycastDist: 5
 --- !u!1 &6764962111808514651
 GameObject:
   m_ObjectHideFlags: 0
