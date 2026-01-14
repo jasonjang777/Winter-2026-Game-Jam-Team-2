@@ -82,7 +82,8 @@ public class Wraith : MonoBehaviour
         {
             --health;
             if (health <= 0)
-            {               
+            {
+                GameManager.Instance.EnemyKilled();
                 Destroy(gameObject);    
             }
 
@@ -123,6 +124,7 @@ public class Wraith : MonoBehaviour
         health -= 2;
         if (health <= 0)
         {
+            GameManager.Instance.EnemyKilled();
             Destroy(gameObject);
         }
     }

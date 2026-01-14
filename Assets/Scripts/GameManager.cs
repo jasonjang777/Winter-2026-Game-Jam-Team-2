@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public UnityEngine.SceneManagement.Scene nextScene;
     [HideInInspector] public PlayerController player;
     private int starCount;
-   // private int enemyCount;
+    private int enemyCount;
     public enum GameState {Lost, InProgress, Won };
     public GameState currentState;
     
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             starCount = GameObject.FindGameObjectsWithTag("Star").Length-1;
+            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
             player = FindAnyObjectByType<PlayerController>();
             //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
         }
@@ -33,7 +34,15 @@ public class GameManager : MonoBehaviour
     public void StarLit()
     {
         starCount--;
-        if (starCount < 0) 
+        if (starCount < 0 & enemyCount < 0) 
+        {
+            Win();
+        }
+    }
+    public void EnemyKilled()
+    {
+        enemyCount--;
+        if (starCount < 0 & enemyCount < 0)
         {
             Win();
         }

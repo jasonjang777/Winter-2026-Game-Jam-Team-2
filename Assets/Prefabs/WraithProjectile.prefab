@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1232485473463664864}
   - component: {fileID: 3853325295297111847}
   - component: {fileID: 8228296803423809662}
+  - component: {fileID: 7262723807652028546}
   m_Layer: 0
   m_Name: WraithProjectile
   m_TagString: EnemyProjectile
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.485, y: 2.266, z: 1.63}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 3.5475001, y: 4.797787, z: 0.3}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -127,3 +128,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   projectileSpeed: 1
   maxProjectileLifetime: 3
+--- !u!114 &7262723807652028546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717610675454632132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3698e6459702da348b5fa924a1a26b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
