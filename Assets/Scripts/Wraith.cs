@@ -16,6 +16,7 @@ public class Wraith : MonoBehaviour
     [SerializeField] protected float attackCooldown;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float attackDamage;
+    [Header("Movement Parameters")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float detectionRange;
     [SerializeField] protected float turningRate;
@@ -40,7 +41,7 @@ public class Wraith : MonoBehaviour
     
        
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         health = maxHealth;
         playerTransform = GameManager.Instance.player.transform;

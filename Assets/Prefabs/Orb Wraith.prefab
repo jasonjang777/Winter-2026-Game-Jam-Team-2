@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 4180788040165422806}
   - component: {fileID: 3395926535435703885}
   - component: {fileID: 1748876691771089805}
-  - component: {fileID: 87854370320286407}
   - component: {fileID: 7748717493522876759}
   - component: {fileID: 3266851420033041288}
+  - component: {fileID: 4037714905594350037}
   m_Layer: 9
   m_Name: Orb Wraith
   m_TagString: Enemy
@@ -184,23 +184,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &87854370320286407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7575940925197134201}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec35eeda9fb9534fab08b14fa921d2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  health: 0
-  playerTransform: {fileID: 0}
-  maxHealth: 0
-  attackCooldown: 0
-  attackRange: 0
 --- !u!135 &7748717493522876759
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -238,4 +221,47 @@ MonoBehaviour:
   playerTransform: {fileID: 7479154813129843923, guid: 3291d256782e85a4f80f1a4e42af2978, type: 3}
   maxHealth: 1
   attackCooldown: 5
-  attackRange: 0
+  attackRange: 20
+  attackDamage: 10
+  moveSpeed: 1.5
+  detectionRange: 30
+  turningRate: 720
+  randomRotationCooldown: 0
+  minRandomRotationStandard: 0
+  maxRandomRotationStandard: 0
+  minRandomRotationIncreased: 0
+  maxRandomRotationIncreased: 0
+  increasdRotationTimeThreshold: 0
+  groundCheckDistance: 0.2
+  groundCheckForwardOffset: 1
+  engageRange: 15
+  aggroed: 0
+  orbProjectile: {fileID: 4717610675454632132, guid: bc8628670ae6f2b4687eecefe055908c, type: 3}
+  projectileOrigin: {fileID: 1080312958747363641}
+--- !u!54 &4037714905594350037
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7575940925197134201}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
