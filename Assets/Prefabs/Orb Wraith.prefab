@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9875a245ac49007498213638a307faa1, type: 2}
+  - {fileID: 2100000, guid: 723c59277fadc49408341cf6a5be7e8c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -160,7 +160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f1ef37ae953c484bbc5d5e4049147e5, type: 2}
+  - {fileID: 2100000, guid: a8e2b2b6972fd3f4291f93464dce56fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   groundCheckForwardOffset: 1
   engageRange: 15
   aggroed: 0
-  orbProjectile: {fileID: 4717610675454632132, guid: bc8628670ae6f2b4687eecefe055908c, type: 3}
+  orbProjectile: {fileID: 1249108150222300035, guid: a3469c81c77c71b49897358b97d05e71, type: 3}
   projectileOrigin: {fileID: 1080312958747363641}
 --- !u!54 &4037714905594350037
 Rigidbody:
