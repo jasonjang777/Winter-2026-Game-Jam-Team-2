@@ -197,7 +197,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 521
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   groundCheckForwardOffset: 1
   engageRange: 15
   aggroed: 0
-  orbProjectile: {fileID: 4717610675454632132, guid: bc8628670ae6f2b4687eecefe055908c, type: 3}
+  orbProjectile: {fileID: 1249108150222300035, guid: a3469c81c77c71b49897358b97d05e71, type: 3}
   projectileOrigin: {fileID: 1080312958747363641}
 --- !u!54 &4037714905594350037
 Rigidbody:
