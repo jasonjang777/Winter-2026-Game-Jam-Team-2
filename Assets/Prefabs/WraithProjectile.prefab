@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1232485473463664864}
   - component: {fileID: 3853325295297111847}
   - component: {fileID: 4773535040542787063}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WraithProjectile
   m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
@@ -125,5 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d274da6ea0aea6242b67400d848995d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WraithProjectile
-  projectileSpeed: 3
-  maxProjectileLifetime: 3
+  projectileSpeed: 12
+  maxProjectileLifetime: 5

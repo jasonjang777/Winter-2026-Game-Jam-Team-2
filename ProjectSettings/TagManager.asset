@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Star
   - EnemyProjectile
+  - PhaseWall
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Weapon
   - Enemy
   - Star
-  - 
-  - 
+  - PhaseWall
+  - EnemyProjectile
   - 
   - 
   - 
