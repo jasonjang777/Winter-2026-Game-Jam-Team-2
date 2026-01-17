@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 8192294032728317585}
   - component: {fileID: 5299770971849230460}
   - component: {fileID: 7982185831275333287}
-  - component: {fileID: 8214562228131879289}
   - component: {fileID: 3774707318131633115}
+  - component: {fileID: 9078022902385216926}
   m_Layer: 0
   m_Name: PowerupHitbox
   m_TagString: Untagged
@@ -74,7 +74,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7615728179158789518}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -7312932923757434636, guid: 30e771a2679d9f6429ec78e6a97a4989, type: 3}
 --- !u!23 &7982185831275333287
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -124,8 +124,22 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8214562228131879289
-SphereCollider:
+--- !u!114 &3774707318131633115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615728179158789518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50359ad0313193f4c8e3443d5ece210b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedPowerup
+  explosionPrefab: {fileID: 5856092901181479170, guid: 71dd95ee9fd7f83488cd81a0a0646de6, type: 3}
+  explosionRadius: 10
+--- !u!64 &9078022902385216926
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,20 +156,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3774707318131633115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7615728179158789518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50359ad0313193f4c8e3443d5ece210b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RedPowerup
-  explosionPrefab: {fileID: 5856092901181479170, guid: 71dd95ee9fd7f83488cd81a0a0646de6, type: 3}
-  explosionRadius: 10
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7312932923757434636, guid: 30e771a2679d9f6429ec78e6a97a4989, type: 3}
