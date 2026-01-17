@@ -1,5 +1,8 @@
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Experimental.Video;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -61,6 +64,10 @@ public class GameManager : MonoBehaviour
     {
         currentState = GameState.Lost;
         SceneManager.LoadScene(thisSceneName);
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0f;
     }
 
 }
