@@ -222,11 +222,11 @@ MonoBehaviour:
   health: 0
   playerTransform: {fileID: 7479154813129843923, guid: 3291d256782e85a4f80f1a4e42af2978, type: 3}
   maxHealth: 2
-  attackCooldown: 5
-  attackRange: 5
+  attackCooldown: 2.5
+  attackRange: 50
   attackDamage: 10
   moveSpeed: 1.5
-  detectionRange: 40
+  detectionRange: 50
   turningRate: 720
   randomRotationCooldown: 3
   minRandomRotationStandard: 15
