@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4717610675454632132}
-  m_Mesh: {fileID: 4711208715938537054, guid: 41aca55a6d1986848abb0edb07c73069, type: 3}
+  m_Mesh: {fileID: 4711208715938537054, guid: 8eea1317fadab7447bdd72cea50a6a76, type: 3}
 --- !u!23 &1232485473463664864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -127,6 +127,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   projectileSpeed: 3
   maxProjectileLifetime: 15
-  scaleSteps: 500
   rateOfChange: 0.001
   lowLimit: 0.3
