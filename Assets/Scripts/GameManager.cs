@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public UnityEngine.SceneManagement.Scene nextScene;
+    private string thisSceneName;
     [HideInInspector] public PlayerController player;
     private int starCount;
     private int enemyCount;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
             starCount = GameObject.FindGameObjectsWithTag("Star").Length-1;
             enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
             player = FindAnyObjectByType<PlayerController>();
+            currentState = GameState.InProgress;
+            thisSceneName = SceneManager.GetActiveScene().name;
             //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
         }
         else
@@ -54,9 +57,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Enemies");
     }
 
-    private void Lose()
+    public void Lose()
     {
         currentState = GameState.Lost;
+        SceneManager.LoadScene(thisSceneName);
     }
 
 }

@@ -331,6 +331,10 @@ public class PlayerController : MonoBehaviour
         healthPoints = Math.Max(healthPoints - dmg, 0f);
         startHealthRegeneration = Time.time + regenDelay;
         healthBar.setHealth(healthPoints);
+        if(healthPoints == 0)
+        {
+            GameManager.Instance.Lose();
+        }
         // Debug.Log("HP: " + healthPoints);
     }
     public void applyHeal(float heal)
