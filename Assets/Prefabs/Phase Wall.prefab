@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6887827082648978696}
   - component: {fileID: 1727744922401627562}
   - component: {fileID: 3895617263662297933}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Phase Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
