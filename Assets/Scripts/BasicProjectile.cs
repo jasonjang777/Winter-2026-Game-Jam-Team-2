@@ -8,13 +8,13 @@ public class BasicProjectile : MonoBehaviour
 
     private float startTime;
 
-    void Start()
+    public virtual void Start()
     {
         startTime = Time.time;
         Destroy(gameObject, maxProjectileLifetime);
     }
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         MoveProjectile();
     }

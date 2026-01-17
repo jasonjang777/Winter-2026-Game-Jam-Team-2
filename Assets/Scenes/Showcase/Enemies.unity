@@ -132,6 +132,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3266851420033041288, guid: a2900b31b6088624e84a9893a9e50e92, type: 3}
+      propertyPath: orbProjectile
+      value: 
+      objectReference: {fileID: 1249108150222300035, guid: a3469c81c77c71b49897358b97d05e71, type: 3}
+    - target: {fileID: 3266851420033041288, guid: a2900b31b6088624e84a9893a9e50e92, type: 3}
       propertyPath: detectionRange
       value: 30
       objectReference: {fileID: 0}
@@ -145,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4180788040165422806, guid: a2900b31b6088624e84a9893a9e50e92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.75
+      value: 4.11
       objectReference: {fileID: 0}
     - target: {fileID: 4180788040165422806, guid: a2900b31b6088624e84a9893a9e50e92, type: 3}
       propertyPath: m_LocalPosition.z

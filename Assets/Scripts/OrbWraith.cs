@@ -24,6 +24,8 @@ public class OrbWraith : Wraith
         if (timer > 1 & attacking)
         {
             attacking = false;
+            GameObject projectile = Instantiate<GameObject>(orbProjectile, projectileOrigin.transform.position, Quaternion.LookRotation(playerTransform.position - transform.position));
+            projectile.GetComponent<WraithProjectile>().SetAttackDamage(attackDamage);
         }
         // End of "Temp" Code
         if (distance < attackRange)
