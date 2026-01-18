@@ -332,7 +332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4530644802313237350
 Transform:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireController
   fireKeyCode: 323
   cameraObject: {fileID: 2405182593357800097}
-  minHealthThreshold: -1000
+  minHealthThreshold: 5
   weaponSwitchCooldown: 1
   basicProjectilePrefab: {fileID: 7633372355513692726, guid: bbc9a760d8597cc4a88389b1f603a6b5, type: 3}
   basicProjectileFireCooldown: 0.5

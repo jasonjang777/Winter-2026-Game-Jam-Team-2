@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Showcase/Level Select.unity
     guid: 848ccb40ce2323146a69e16f0a34bfb4
   - enabled: 1
-    path: Assets/Scenes/Showcase/Basic Movement.unity
+    path: Assets/Scenes/Showcase/Orbit.unity
     guid: 9db8f8912ad772c439d3958c87c5f410
   - enabled: 1
     path: Assets/Scenes/Showcase/Enemies.unity

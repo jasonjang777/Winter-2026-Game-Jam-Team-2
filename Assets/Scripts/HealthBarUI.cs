@@ -16,7 +16,7 @@ public class HealthBarUI : MonoBehaviour
     
     public void setHealth(float health)
     {
-        if (health <= Health - 10)
+        if (health <= Health - 5)
         {
             StartCoroutine(flashRed());
         }
