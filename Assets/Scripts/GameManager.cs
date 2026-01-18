@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
        currentState = GameState.Won;
-        SceneManager.LoadScene("Enemies");
+        //SceneManager.LoadScene("Enemies");
 
     }
 
@@ -76,5 +76,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
     }
-
+    public void UnPause()
+    {
+        Time.timeScale = 1f;
+    }
 }
