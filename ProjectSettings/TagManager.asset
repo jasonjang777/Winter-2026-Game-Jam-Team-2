@@ -6,6 +6,10 @@ TagManager:
   tags:
   - DestroyProjectile
   - PlayerProjectile
+  - Enemy
+  - Star
+  - EnemyProjectile
+  - PhaseWall
   layers:
   - Default
   - TransparentFX
@@ -16,10 +20,10 @@ TagManager:
   - Ground
   - PlayerProjectile
   - Weapon
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Star
+  - PhaseWall
+  - EnemyProjectile
   - 
   - 
   - 

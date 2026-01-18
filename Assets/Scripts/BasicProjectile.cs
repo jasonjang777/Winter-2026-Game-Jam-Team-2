@@ -3,15 +3,18 @@ using UnityEngine;
 public class BasicProjectile : MonoBehaviour
 {
 
-    [SerializeField] private float projectileSpeed = 1f;
-    [SerializeField] private float projectileLifetime = 3f;
+    [SerializeField] private float projectileSpeed = 3f;
+    [SerializeField] private float maxProjectileLifetime = 3f;
 
-    void Start()
+    private float startTime;
+
+    public virtual void Start()
     {
-        Destroy(gameObject, projectileLifetime);
+        startTime = Time.time;
+        Destroy(gameObject, maxProjectileLifetime);
     }
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         MoveProjectile();
     }
@@ -25,5 +28,10 @@ public class BasicProjectile : MonoBehaviour
     {   
         // Debug.Log("platform hit");
         Destroy(gameObject);
+    }
+
+    public float getProjectileLifetime()
+    {
+        return Time.time - startTime;
     }
 }
