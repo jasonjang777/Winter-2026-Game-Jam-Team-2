@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using System.Collections;
 
 public class Wraith : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class Wraith : MonoBehaviour
         if (collision.gameObject.tag == "PlayerProjectile")
         {
             --health;
+            StartCoroutine(flashDamage());
             if (health <= 0)
             {
                 GameManager.Instance.EnemyKilled();
@@ -122,6 +124,7 @@ public class Wraith : MonoBehaviour
     public void Explode()
     {
         health -= 2;
+        StartCoroutine(flashDamage());
         if (health <= 0)
         {
             GameManager.Instance.EnemyKilled();
@@ -144,6 +147,18 @@ public class Wraith : MonoBehaviour
             return hit.collider.gameObject.transform.parent.gameObject;
         }
         return null;
+    }
+
+    IEnumerator flashDamage() 
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.15f);
+        transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.15f);
+        transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.15f);
+        transform.GetChild(0).gameObject.SetActive(true);
+        yield break;
     }
 
 }
