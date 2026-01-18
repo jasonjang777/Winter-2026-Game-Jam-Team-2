@@ -1,5 +1,5 @@
-using System.Collections;
-using UnityEditor.Build;
+//using System.Collections;
+//using UnityEditor.Build;
 using UnityEngine;
 
 public class FireController : MonoBehaviour
