@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5981669012276014756}
   - component: {fileID: 2547951159661209493}
   - component: {fileID: 6398476538842911352}
+  - component: {fileID: 4503215846681528041}
   m_Layer: 0
   m_Name: PowerupHitbox
   m_TagString: Untagged
@@ -160,8 +161,29 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7699914560296781984, guid: 30e771a2679d9f6429ec78e6a97a4989, type: 3}
+--- !u!135 &4503215846681528041
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643265274645967999}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.1
+  m_Center: {x: -0.005618751, y: -0.0954915, z: 0}
