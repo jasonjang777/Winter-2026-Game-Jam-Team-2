@@ -118,6 +118,7 @@ MonoBehaviour:
   sceneName: None
   levelName: LevelName
   roatationSpeed: 20
+  speedUp: 30
   titlePanel: {fileID: 0}
 --- !u!114 &5255933048062135945
 MonoBehaviour:

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Showcase/Main Menu.unity
     guid: 63b17c5c4d9ec2d47ab3354963b3ef83
   - enabled: 1
-    path: Assets/Scenes/Showcase/LevelSelect.unity
+    path: Assets/Scenes/Showcase/Level Select.unity
     guid: 848ccb40ce2323146a69e16f0a34bfb4
   - enabled: 1
     path: Assets/Scenes/Showcase/Basic Movement.unity

@@ -79,6 +79,12 @@ public class PlayerController : MonoBehaviour
         moveForward = Input.GetAxisRaw("Vertical");
 
         RotateCamera();
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.Exit();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         if (Input.GetButtonDown("Jump") && isGrounded && !launched)
         {

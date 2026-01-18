@@ -9,6 +9,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] string sceneName;
     [SerializeField] string levelName;
     [SerializeField] private float roatationSpeed;
+    [SerializeField] private float speedUp;
     [SerializeField] private TextMeshProUGUI titlePanel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +33,7 @@ public class LevelSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             titlePanel.text = levelName; 
         }
-        roatationSpeed+= 30;
+        roatationSpeed+= speedUp;
 
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -41,6 +42,6 @@ public class LevelSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             titlePanel.text = "";
         }
-        roatationSpeed -= 30;
+        roatationSpeed -= speedUp;
     }
 }
