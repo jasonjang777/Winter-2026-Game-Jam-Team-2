@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
        currentState = GameState.Won;
-        //SceneManager.LoadScene("Enemies");
+       SceneManager.LoadScene("Win Screen");
 
     }
 

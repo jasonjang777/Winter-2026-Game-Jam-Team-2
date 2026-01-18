@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Showcase/Stairway to Heaven.unity
     guid: bef0418ff9537f041a756bd40bfcfdfb
   - enabled: 1
-    path: Assets/Scenes/Showcase/Win.unity
+    path: Assets/Scenes/Showcase/The Divide.unity
     guid: 3da8a520abbc13942a552b7cfbdaf837
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
