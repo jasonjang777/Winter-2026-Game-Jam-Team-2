@@ -1,15 +1,18 @@
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Experimental.Video;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public UnityEngine.SceneManagement.Scene nextScene;
-    private string thisSceneName;
+    public string thisSceneName;
     [HideInInspector] public PlayerController player;
-    private int starCount;
-    private int enemyCount;
+    public int starCount;
+    public int enemyCount;
     public enum GameState {Lost, InProgress, Won };
     public GameState currentState;
     
@@ -20,18 +23,24 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-            starCount = GameObject.FindGameObjectsWithTag("Star").Length-1;
-            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
-            player = FindAnyObjectByType<PlayerController>();
-            currentState = GameState.InProgress;
-            thisSceneName = SceneManager.GetActiveScene().name;
+            
             //enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
         }
         else
         {
+
+            GameManager.Instance.starCount = GameObject.FindGameObjectsWithTag("Star").Length - 1;
+            GameManager.Instance.enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
+            GameManager.Instance.player = FindAnyObjectByType<PlayerController>();
+            GameManager.Instance.currentState = GameState.InProgress;
+            GameManager.Instance.thisSceneName = SceneManager.GetActiveScene().name;
             Destroy(gameObject);
         }
-
+        starCount = GameObject.FindGameObjectsWithTag("Star").Length - 1;
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length - 1;
+        player = FindAnyObjectByType<PlayerController>();
+        currentState = GameState.InProgress;
+        thisSceneName = SceneManager.GetActiveScene().name;
     }
 
     public void StarLit()
@@ -55,12 +64,17 @@ public class GameManager : MonoBehaviour
     {
        currentState = GameState.Won;
         SceneManager.LoadScene("Enemies");
+
     }
 
     public void Lose()
     {
         currentState = GameState.Lost;
         SceneManager.LoadScene(thisSceneName);
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0f;
     }
 
 }
