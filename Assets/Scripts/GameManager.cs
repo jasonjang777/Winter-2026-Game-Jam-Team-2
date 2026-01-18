@@ -1,8 +1,8 @@
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.Experimental.Video;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+//using UnityEngine.Experimental.Video;
+//using UnityEngine.InputSystem;
+//using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -63,7 +63,10 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
        currentState = GameState.Won;
-        //SceneManager.LoadScene("Enemies");
+        GameManager.Instance.Exit();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("Win Screen");
 
     }
 
